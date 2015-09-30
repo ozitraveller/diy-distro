@@ -1,0 +1,61 @@
+#!/bin/sh
+
+_VERSION="2.2"
+
+clear
+echo "Version ["$_VERSION"]"
+#echo -n "Check version and run? (Y|n) > "
+#read a
+#if [ "$a" = "y" ] || [ "$a" = "Y" ] || \
+#[ "$a" = "" ]; then
+
+
+
+cd diy-build
+rm -rf ./auto/*
+cp -rf ../diy-source/auto/* ./auto/
+cd config
+
+if [ ! -d "bootloaders" ]; then
+	mkdir bootloaders
+fi
+
+#if [ ! -d "binary_debian-installer" ]; then
+	#mkdir binary_debian-installer
+#fi
+ 
+rm -rf ./apt/*
+rm -rf ./archives/*
+rm -rf ./hooks/*
+rm -rf ./includes.chroot/*
+rm -rf ./package-lists/*
+rm -rf ./includes.installer/*
+# rm -rf ./binary_debian-installer
+rm -rf ./bootloaders/*
+rm -rf ./includes.binary/*
+
+if [ ! -d "./includes.binary/install" ]; then
+	mkdir ./includes.binary/install
+fi
+
+cp ../../diy-source/config/apt/* ./apt/
+cp ../../diy-source/config/archives/* ./archives/
+cp -r ../../diy-source/config/bootloaders/* ./bootloaders/
+
+# cp -r ../../diy-source/config/binary_debian-installer .
+cp -r ../../diy-source/config/includes.installer/* ./includes.installer/
+cp ../../diy-source/config/includes.installer/preseed.cfg ./includes.binary/install
+
+cp -r ../../diy-source/config/hooks/* ./hooks/
+cp -r ../../diy-source/config/includes.chroot/* ./includes.chroot/
+cp ../../diy-source/config/package-lists/* ./package-lists/
+
+sed -i -e 's/VERSION/'${_VERSION}'/g' ./includes.chroot/etc/hostname
+sed -i -e 's/VERSION/'${_VERSION}'/g' ./includes.chroot/etc/issue
+sed -i -e 's/VERSION/'${_VERSION}'/g' ./includes.chroot/etc/issue.net
+sed -i -e 's/VERSION/'${_VERSION}'/g' ./includes.chroot/etc/motd
+sed -i -e 's/VERSION/'${_VERSION}'/g' ./includes.chroot/etc/os-release
+
+cd ../..
+
+#fi
