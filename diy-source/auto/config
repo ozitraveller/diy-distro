@@ -11,6 +11,7 @@ _MIRROR_BINARY="http://ftp.us.debian.org/debian/"
 
 lb config noauto \
 	--mode debian \
+	--chroot-filesystem squashfs \
 	--distribution "${_DISTRIBUTION}" \
 	--debian-installer-distribution "${_DISTRIBUTION}" \
 	--debian-installer live \
