@@ -12,6 +12,6 @@ echo "  -----------------------------[ screen $STEP of $STEPS ]-----------------
 
   Note: additional packages listed as dependencies will also be installed."
 
-if prompt "  Would you like to install LibreOffice?"; then
+if prompt "  Would you like to install Image Editors?"; then
 	sudo apt-get install -y gimp inkscape mtpaint gcolor2 shotwell darktable rawtherapee
 fi

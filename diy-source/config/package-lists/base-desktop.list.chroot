@@ -51,7 +51,7 @@ conky-all
 file-roller
 xarchiver
 gnome-calculator 
-transmission-gtk 
+# transmission-gtk 
 
 scrot 
  

@@ -22,15 +22,15 @@
       <Menu icon="folder.png" label="Accessories">
           <Program label="Calculator" confirm="false">/usr/bin/gnome-calculator</Program>
   		  <Program label="Screenshot" confirm="false">/usr/bin/xfce4-screenshooter</Program>
-  		  <Program label="Text Editor" confirm="false">editor</Program>
+  		  <Program label="Leafpad" confirm="false">editor</Program>
 		  <Program icon="terminal.png" label="Terminal">x-terminal-emulator</Program>
-		  <Program icon="thunar.png" label="File Manager">x-file-manager</Program>
+		  <Program icon="thunar.png" label="Thunar">x-file-manager</Program>
       </Menu>
       <Menu icon="folder.png" label="Graphics">
           <Program label="Mirage" confirm="false">mirage</Program>
       </Menu>      
       <Menu icon="folder.png" label="Internet">
-           <Program icon="firefox.png" label="Web Browser">x-www-browser</Program>
+           <Program icon="firefox.png" label="Iceweasel">x-www-browser</Program>
       </Menu>  
       <Menu icon="folder.png" label="Multimedia">
           <Program label="VLC media player" confirm="false">/usr/bin/vlc</Program>
