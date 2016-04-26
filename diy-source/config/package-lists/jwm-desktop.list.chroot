@@ -1,12 +1,13 @@
 jwm
-
+dmenu
 
 hsetroot
-nitrogen
+# nitrogen
+feh
 
 lxterminal
 xfce4-mixer
-compton
+# compton
 lxrandr
 lxappearance
 gmrun
