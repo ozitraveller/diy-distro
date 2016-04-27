@@ -4,7 +4,7 @@
 
 set -e
 
-echo DYI-LIVE-Hook: "$0"
+echo DIY-LIVE-Hook: "$0"
 echo ""
 
 update-alternatives --install /usr/bin/desktop-grub desktop-grub /usr/share/images/desktop-base/diy-grub.png 99
