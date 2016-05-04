@@ -25,7 +25,7 @@
   		  <Program label="Screenshot" confirm="false">/usr/bin/xfce4-screenshooter</Program>
   		  <Program label="Leafpad" confirm="false">editor</Program>
 		  <Program icon="terminal.png" label="Terminal">x-terminal-emulator</Program>
-		  <Program icon="thunar.png" label="Thunar">x-file-manager</Program>
+		  <Program icon="thunar.png" label="Pcmanfm">x-file-manager</Program>
       </Menu>
       <Menu icon="folder.png" label="Graphics">
           <Program label="Mirage" confirm="false">mirage</Program>
@@ -48,7 +48,6 @@
           <Program label="Bootup-Manager" confirm="false">su-to-root -X -c /usr/bin/bum</Program>
           <Program label="Disk Manager" confirm="false">su-to-root -X -c /usr/sbin/disk-manager</Program>
 		  <Program label="Gdebi Package Installer" confirm="false">su-to-root -X -c /usr/bin/gdebi-gtk</Program>
-		  <!--<Program label="Gigolo" confirm="false">/usr/bin/gigolo</Program> -->
           <Program label="Gparted" confirm="false">su-to-root -X -c /usr/sbin/gparted</Program>
           <Program label="Root Terminal" confirm="false">su-to-root -X -c x-terminal-emulator</Program>
           <Program label="Root File Manager" confirm="false">su-to-root -X -c x-file-manager</Program>

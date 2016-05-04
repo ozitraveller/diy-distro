@@ -50,8 +50,8 @@ rpl
 # fuse-utils  fusesmb
 # gnome-disk-utility
 # gigolo
-gvfs
-gvfs-bin
+# gvfs
+# gvfs-bin
 # gvfs-common
 # gvfs-fuse
 # gvfs-backends

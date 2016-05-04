@@ -16,14 +16,55 @@ set -e
 echo DIY-LIVE-Hook: "$0"
 echo ""
 
-echo "Delete superfluous non gtk debian installer components, in order to save some space"
-rm -f binary/install/initrd.gz binary/install/vmlinuz
-
-echo "Replace debian installer kernel with hard link to live kernel if they do not differ"
-if [ "$(cmp -s binary/install/gtk/vmlinuz binary/live/vmlinuz ; echo $?)" = "0" ]
+if [ -e config/binary_debian-installer/vmlinuz ] && [ -e config/binary_debian-installer/initrd.gz ]
 then
-	echo "  Replacing..."
-	rm -f binary/install/gtk/vmlinuz
-	ln binary/live/vmlinuz binary/install/gtk/vmlinuz
+    cp -v config/binary_debian-installer/vmlinuz config/binary_debian-installer/initrd.gz binary/install/gtk
 fi
-echo ""
+
+if [ -e config/binary_debian-installer/logo_debian.png ] || [ -e config/binary_debian-installer/additions_amd64.tar.gz ]
+then
+
+	TARGET_INITRD="binary/install/gtk/initrd.gz"
+	REPACK_TMPDIR="binary.initrd"
+
+	if [ -e "${TARGET_INITRD}" ]
+	then
+		# cpio does not have a "extract to directory", so we must change to target directory
+		mkdir -p ${REPACK_TMPDIR}
+		cd ${REPACK_TMPDIR}
+		gunzip -c < ../${TARGET_INITRD} | cpio -i --make-directories --no-absolute-filenames
+
+		# Overwrite banner
+		cp ../config/binary_debian-installer/logo_debian.png ./usr/share/graphics/logo_debian.png
+
+		# Unpack additions
+		# gunzip -c ../config/binary_debian-installer/additions_amd64.tar.gz | tar xf -
+		cp -r ../config/binary_debian-installer/additions/etc/gtk-2.0/gtkrc ./etc/gtk-2.0/
+		cp -r ../config/binary_debian-installer/additions/usr/bin/* ./usr/bin/
+		cp -r ../config/binary_debian-installer/additions/usr/share/themes/* ./usr/share/themes/
+
+		# Copy preseed.cfg
+		cp ../config/includes.installer/preseed.cfg .
+
+		# cp firmware from chroot
+		if [ ! -d ./lib/firmware ]
+		then
+		    mkdir ./lib/firmware
+		fi
+		cp -a ../chroot/lib/firmware/ipw* ../chroot/lib/firmware/iwl* ./lib/firmware
+
+		# repack everything in a new initrd.gz
+		find | cpio -H newc -o | gzip -9 > ../${TARGET_INITRD}
+		cd .. && rm -rf ${REPACK_TMPDIR}
+
+		# Delete superfluous non gtk debian installer components, in order to save some space:
+		# rm -f binary/install/initrd.gz binary/install/vmlinuz
+
+		# Replace debian installer kernel with hard link to live kernel if they do not differ:
+		if [ "$(cmp -s binary/install/gtk/vmlinuz binary/live/vmlinuz ; echo $?)" = "0" ]
+		then
+		    rm -f binary/install/gtk/vmlinuz
+		    ln binary/live/vmlinuz binary/install/gtk/vmlinuz
+		fi
+	fi
+fi

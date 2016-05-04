@@ -6,7 +6,7 @@ hsetroot
 feh
 
 lxterminal
-xfce4-mixer
+# xfce4-mixer
 # compton
 lxrandr
 lxappearance
@@ -14,6 +14,9 @@ gmrun
 leafpad
 xpdf
 
-pcmanfm
+# pcmanfm
+spacefm
+isof
+udevil
 
 galternatives
